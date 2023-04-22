@@ -1,14 +1,31 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { MantineProvider } from "@mantine/core";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
+import { useState } from "react";
+import Layout from "../components/Layout";
 
 export default function App(props: AppProps) {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
+
+  const toggleColorScheme = (scheme?: ColorScheme) => {
+    if (scheme) {
+      setColorScheme(scheme);
+      return;
+    }
+
+    setColorScheme((ps) => (ps === "dark" ? "light" : "dark"));
+  };
+
   const { Component, pageProps } = props;
 
   return (
     <>
       <Head>
-        <title>Page title</title>
+        <title>Dynamic UI</title>
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta
           name="viewport"
@@ -16,16 +33,23 @@ export default function App(props: AppProps) {
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: "dark",
-        }}
+      <ColorSchemeProvider
+        toggleColorScheme={toggleColorScheme}
+        colorScheme={colorScheme}
       >
-        <Component {...pageProps} />
-      </MantineProvider>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme: colorScheme,
+          }}
+        >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </>
   );
 }
