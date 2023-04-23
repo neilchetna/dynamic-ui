@@ -1,5 +1,11 @@
-import { Flex, Text } from "@mantine/core";
-import { IconAppWindow } from "@tabler/icons-react";
+import {
+  Box,
+  Flex,
+  Text,
+  useMantineColorScheme,
+  useMantineTheme,
+} from "@mantine/core";
+import { IconWand } from "@tabler/icons-react";
 import React, { ReactNode } from "react";
 import { ColorSchemeToggle } from "./ColorSchemeToggle";
 
@@ -9,10 +15,10 @@ type Props = {
 
 function Layout({ children }: Props) {
   return (
-    <div>
+    <Box w="100%" h="100%">
       <Flex mx="sm" mt="sm" align="center" justify="space-between">
         <Flex gap="xs" align="center">
-          <IconAppWindow size={32} />
+          <IconWand />
           <Text mb="0" fz="lg" fw="bolder">
             Dynamic UI
           </Text>
@@ -20,7 +26,7 @@ function Layout({ children }: Props) {
         <ColorSchemeToggle />
       </Flex>
       {children}
-    </div>
+    </Box>
   );
 }
 
