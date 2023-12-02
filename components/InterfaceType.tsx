@@ -1,15 +1,12 @@
-import { Box, Button, Card, CardSection, Flex, Text } from "@mantine/core";
-import {
-  IconCodeAsterix,
-  IconExternalLink,
-  IconMarkdown,
-} from "@tabler/icons-react";
+import { Box, Button, Card, Chip, Flex, Text } from "@mantine/core";
+import { IconCode, IconExternalLink, IconMarkdown } from "@tabler/icons-react";
 import React from "react";
 
 type InterfaceTypeCardProps = {
   name: string;
   icon: JSX.Element;
   description: string;
+  disabled?: boolean;
 };
 
 function InterfaceType() {
@@ -17,6 +14,7 @@ function InterfaceType() {
     name,
     icon,
     description,
+    disabled = false,
   }: InterfaceTypeCardProps) => (
     <Card p="lg" radius="md" w="100%" shadow="sm" withBorder>
       <Flex h="100%" direction="column" justify="space-between">
@@ -26,6 +24,11 @@ function InterfaceType() {
             <Text ff="monospace" fw={700} size="lg">
               {name}
             </Text>
+            {disabled && (
+              <Chip checked={false} color="gray" variant="outline">
+                Coming soon
+              </Chip>
+            )}
           </Flex>
           <Text ff="monospace" c="dimmed" size="sm" mt="md">
             {description}
@@ -39,6 +42,7 @@ function InterfaceType() {
           radius="md"
           leftIcon={<IconExternalLink size={16} />}
           mt="lg"
+          disabled={disabled}
         >
           Try it out
         </Button>
@@ -54,7 +58,7 @@ function InterfaceType() {
           This method is good for generating 
           cards, blogs and also supports passing props
          `}
-        icon={<IconCodeAsterix />}
+        icon={<IconCode />}
         name="JSX renderer"
       />
       <InterfaceTypeCard
@@ -65,6 +69,7 @@ function InterfaceType() {
         `}
         icon={<IconMarkdown />}
         name="Markdown renderer"
+        disabled
       />
     </Flex>
   );
