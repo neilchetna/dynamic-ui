@@ -1,9 +1,12 @@
-import { Button, Group } from "@mantine/core";
+import { Container } from "@mantine/core";
+import InterfaceType from "../components/InterfaceType";
+import Welcome from "../components/Welcome";
 
 export default function IndexPage() {
   return (
-    <Group mt={50} position="center">
-      <Button size="xl">Welcome to Mantine!</Button>
-    </Group>
+    <Container size="md">
+      <Welcome />
+      <InterfaceType />
+    </Container>
   );
 }
