@@ -16,7 +16,15 @@ type Props = {
 function Layout({ children }: Props) {
   return (
     <Box w="100%" h="100%">
-      <Flex mx="sm" mt="sm" align="center" justify="space-between">
+      <Flex
+        w="100%"
+        maw="110rem"
+        pb="sm"
+        mt="sm"
+        mx="auto"
+        align="center"
+        justify="space-between"
+      >
         <Flex gap="xs" align="center">
           <IconWand />
           <Text mb="0" fz="lg" fw="bolder">
