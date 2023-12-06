@@ -1,14 +1,17 @@
 import {
   Box,
   Card,
+  Divider,
   Input,
   JsonInput,
   Tabs,
   Text,
   TextInput,
 } from "@mantine/core";
-import { IconCodeAsterix, IconCursorText } from "@tabler/icons-react";
+import { Dropzone } from "@mantine/dropzone";
+import { IconCodeAsterix, IconCursorText, IconJson } from "@tabler/icons-react";
 import React from "react";
+import JSXDropzone from "./JSXDropzone";
 
 function JSXInput() {
   return (
@@ -22,7 +25,7 @@ function JSXInput() {
           JSON data
         </Text>
       </Box>
-      <Tabs mt="sm" variant="outline" defaultValue="text">
+      <Tabs mt="sm" variant="default" defaultValue="text">
         <Tabs.List>
           <Tabs.Tab icon={<IconCursorText size="0.8rem" />} value="text">
             Text
@@ -33,13 +36,13 @@ function JSXInput() {
         </Tabs.List>
         <Tabs.Panel value="json">
           <JsonInput
-            minRows={25}
-            maxRows={25}
-            h="100%"
+            minRows={10}
             label="Add your JSON here"
             placeholder={`{"data": ...}`}
             mt="md"
           />
+          <Divider my="xl" label="OR" labelPosition="center" />
+          <JSXDropzone onDrop={() => {}} />
         </Tabs.Panel>
         <Tabs.Panel value="text">
           <TextInput
