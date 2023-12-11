@@ -1,0 +1,3 @@
+from server.code_generation.schemas import CodeCreate
+def create_code(code_request: CodeCreate):
+    ...
