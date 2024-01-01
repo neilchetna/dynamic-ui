@@ -18,8 +18,9 @@ function Layout({ children }: Props) {
     <Box w="100%" h="100%">
       <Flex
         w="100%"
-        maw="110rem"
+        maw="100rem"
         pb="sm"
+        px="md"
         mt="sm"
         mx="auto"
         align="center"

@@ -10,8 +10,9 @@ import {
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconCrystalBall } from "@tabler/icons-react";
-import React from "react";
+import React, { useState } from "react";
 import JSXInput from "../components/JSXInput";
+import apiFactory from "../components/utils/api.factory";
 
 const useStyle = createStyles((theme) => ({
   "empty-box": {
@@ -28,6 +29,18 @@ function Jsx() {
   const matches = useMediaQuery("(min-width: 700px)");
   const { classes } = useStyle();
 
+  const [generatedResponse, setGeneratedResponse] = useState();
+
+  const api = apiFactory("code-generation");
+  const handleTextSubmit = async (uiDescription: string) => {
+    const response = await api.post({
+      ui_description: uiDescription,
+      language: "JSX",
+    });
+
+    setGeneratedResponse(response as any);
+  };
+
   return (
     <Container mb={matches ? "xl" : ""} size="100rem">
       <Flex
@@ -35,7 +48,7 @@ function Jsx() {
         h={matches ? "90vh" : "auto"}
         gap="lg"
       >
-        <JSXInput />
+        <JSXInput onTextSubmit={handleTextSubmit} />
         <Card
           h={matches ? "auto" : "100vh"}
           p="lg"
@@ -59,17 +72,21 @@ function Jsx() {
             w="100%"
             position="center"
           >
-            <div>
-              <Text align="center" color="dimmed">
-                <IconCrystalBall size="5rem" stroke={1} />
-              </Text>
-              <Text align="center" fz="lg">
-                Your creation will appear here
-              </Text>
-              <Text align="center" fz="sm" color="dimmed">
-                This might take few seconds to load.
-              </Text>
-            </div>
+            {generatedResponse ? (
+              <div>{JSON.stringify(generatedResponse)}</div>
+            ) : (
+              <div>
+                <Text align="center" color="dimmed">
+                  <IconCrystalBall size="5rem" stroke={1} />
+                </Text>
+                <Text align="center" fz="lg">
+                  Your creation will appear here
+                </Text>
+                <Text align="center" fz="sm" color="dimmed">
+                  This might take few seconds to load.
+                </Text>
+              </div>
+            )}
           </Group>
         </Card>
       </Flex>
