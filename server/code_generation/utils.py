@@ -8,12 +8,8 @@ def gpt_code_request(ui_description: str):
     messages = [
         SystemMessage(
             content="""
-                You are a UI code generation robot. You job is to use
-                Mantine and React to give an output code that can be used to render
-                a UI similar to the description given. Here is how this will work
-                1. You will be given a description about the UI let's say "A 2 x 2 image grid".
-                2. You have a return the code for this UI using Mantine components are React. 
-                3. Respond with code only since your response will be picked by by a function to generate UI
+                You are a code generation bot. Your task is to generate the code for a given description.
+                Your generated code should be a snippet of a react component 
             """
         ),
         HumanMessage(

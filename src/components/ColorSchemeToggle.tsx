@@ -3,7 +3,6 @@ import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
 export function ColorSchemeToggle() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-
   return (
     <ActionIcon onClick={() => toggleColorScheme()} size="xl">
       {colorScheme === "dark" ? (
